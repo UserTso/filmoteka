@@ -1,0 +1,10 @@
+@import '~node_modules/modern-normalize/modern-normalize.css';
+
+body {
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+
+  font-weight: 500;
+  background-color: $primary-bg-color;
+  color: $primary-text-color;
+}
