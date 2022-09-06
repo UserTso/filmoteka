@@ -28,13 +28,16 @@ export async function renderGalleryItems(films) {
     const markup = films
       .map(film => {
         return `<li class='list-item'>
-      <img class='poster' src="${`https://image.tmdb.org/t/p/w500${film.poster_path}` ||
-          `../images/gallery/355e4b0ed8a86718cd2468096b9b9190.jpg`
-          }"
+      <img class='poster' src="${
+        film.poster_path === null
+          ? new URL('../images/gallery/question-mark.jpeg', import.meta.url)
+          : `https://image.tmdb.org/t/p/w500${film.poster_path}`
+      }"
   alt="${film.title}"
   /><h2 class='title'>${film.title}</h2>
-  <p class='info'>${mapGanereId(film.genre_ids, generesConfig)} &#124 ${film.release_date.slice(0, 4) || 'Unknown'
-          }</p></li>`;
+  <p class='info'>${
+    mapGanereId(film.genre_ids, generesConfig) || 'Unknown'
+  } &#124 ${film.release_date.slice(0, 4) || 'Unknown'}</p></li>`;
       })
       .join('');
     gallery.innerHTML = markup;
