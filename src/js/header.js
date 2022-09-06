@@ -1,17 +1,16 @@
 import UnsplashAPI from './fetch-films';
-import { renderGalleryItems } from './gallery'
+import { renderGalleryItems } from './gallery';
 
 const unsplashAPI = new UnsplashAPI();
 
 const searchForm = document.querySelector('.search-form');
-const empty = document.querySelector(".empty")
-const notFound = document.querySelector(".not-found")
-
+const empty = document.querySelector('.empty');
+const notFound = document.querySelector('.not-found');
 
 searchForm.addEventListener('submit', searchFilm);
 
-
 async function searchFilm(event) {
+
     event.preventDefault();
 
     // const seartchResult = event.currentTarget.input.value;
@@ -42,5 +41,12 @@ async function searchFilm(event) {
     } catch (error) {
         console.log(error.message);
     }
+    // console.log(results);
+    renderGalleryItems(results);
+
+    // console.log(results);
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
