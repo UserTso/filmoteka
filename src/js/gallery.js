@@ -19,7 +19,7 @@ popularFilms();
 
 // ?-----------------Render Gallery----------------
 
-async function renderGalleryItems(films) {
+export async function renderGalleryItems(films) {
   try {
     const { genres } = await unsplashAPI.fetchGeneres();
     // console.log(genres);
@@ -28,18 +28,16 @@ async function renderGalleryItems(films) {
     const markup = films
       .map(film => {
         return `<li class='list-item'>
-      <img class='poster' src="${
-        `https://image.tmdb.org/t/p/w500${film.poster_path}` ||
-        `../images/gallery/355e4b0ed8a86718cd2468096b9b9190.jpg`
-      }"
+      <img class='poster' src="${`https://image.tmdb.org/t/p/w500${film.poster_path}` ||
+          `../images/gallery/355e4b0ed8a86718cd2468096b9b9190.jpg`
+          }"
   alt="${film.title}"
   /><h2 class='title'>${film.title}</h2>
-  <p class='info'>${mapGanereId(film.genre_ids, generesConfig)} &#124 ${
-          film.release_date.slice(0, 4) || 'Unknown'
-        }</p></li>`;
+  <p class='info'>${mapGanereId(film.genre_ids, generesConfig)} &#124 ${film.release_date.slice(0, 4) || 'Unknown'
+          }</p></li>`;
       })
       .join('');
-    gallery.insertAdjacentHTML('beforeend', markup);
+    gallery.innerHTML = markup;
   } catch (error) {
     console.log(error.message);
   }
