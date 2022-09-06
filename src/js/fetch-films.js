@@ -16,6 +16,14 @@ export default class UnsplashAPI {
     return films;
   }
 
+  async fetchFilmInfo(id) {
+    const response = await fetch(
+      `${this.#BASE_URL}movie/${id}?${this.#API_KEY}&language=en-US`
+    );
+    const info = await response.json();
+    return info;
+  }
+
   async fetchGeneres() {
     const response = await fetch(
       `${this.#BASE_URL}genre/movie/list?${this.#API_KEY}&language=en-US&page=${
