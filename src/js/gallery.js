@@ -1,18 +1,19 @@
 const gallery = document.querySelector('.gallery-list');
 
-import { fetchPopularFilms, fetchGeneres } from './fetch-films.js';
+import UnsplashAPI from './fetch-films';
+const unsplashAPI = new UnsplashAPI();
 
 // !--------Popular Films to main-------------------
 
-const popularFilms = async () => {
+async function popularFilms() {
   try {
-    const { results } = await fetchPopularFilms();
-    console.log(results);
+    const { results } = await unsplashAPI.fetchPopularFilms();
+    // console.log(results);
     renderGalleryItems(results);
   } catch (error) {
     console.log(error.message);
   }
-};
+}
 
 popularFilms();
 
@@ -20,8 +21,10 @@ popularFilms();
 
 async function renderGalleryItems(films) {
   try {
-    const { genres } = await fetchGeneres();
+    const { genres } = await unsplashAPI.fetchGeneres();
+    // console.log(genres);
     const generesConfig = getGeneresConfig(genres);
+    // console.log(generesConfig);
     const markup = films
       .map(film => {
         return `<li class='list-item'>
