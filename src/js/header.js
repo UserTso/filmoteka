@@ -19,17 +19,23 @@ async function searchFilm(event) {
 
     // console.log(unsplashAPI.searchQuery);
     if (unsplashAPI.searchQuery === "") {
+        notFound.style.display = 'none';
         empty.style.display = 'block';
         return
-
     }
     try {
 
         const { results } = await unsplashAPI.searchMovies();
         if (results.length === 0) {
-            return alert("ничего не нашлось");
+            empty.style.display = 'none';
+            notFound.style.display = 'block';
+            return
         }
+
         // console.log(results);
+        notFound.style.display = 'none';
+
+        empty.style.display = 'none';
         renderGalleryItems(results);
 
         // console.log(results);
@@ -38,7 +44,3 @@ async function searchFilm(event) {
     }
 }
 
-// function alertMessage(element) {
-//     element.style.display = 'block';
-//     // captionDelay: 250
-// }
