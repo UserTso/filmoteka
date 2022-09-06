@@ -8,8 +8,7 @@ export default class UnsplashAPI {
 
   async fetchPopularFilms() {
     const response = await fetch(
-      `${this.#BASE_URL}movie/popular?${this.#API_KEY}&language=en-US&page=${
-        this.page
+      `${this.#BASE_URL}movie/popular?${this.#API_KEY}&language=en-US&page=${this.page
       }`
     );
     const films = await response.json();
@@ -18,18 +17,16 @@ export default class UnsplashAPI {
 
   async fetchGeneres() {
     const response = await fetch(
-      `${this.#BASE_URL}genre/movie/list?${this.#API_KEY}&language=en-US&page=${
-        this.page
+      `${this.#BASE_URL}genre/movie/list?${this.#API_KEY}&language=en-US&page=${this.page
       }`
     );
     const genere = await response.json();
     return genere;
   }
 
-  async searchMovies(search) {
+  async searchMovies() {
     const response = await fetch(
-      `${this.#BASE_URL}search/movie?${this.#API_KEY}&language=en-US&query=${
-        this.searchQuery
+      `${this.#BASE_URL}search/movie?${this.#API_KEY}&language=en-US&query=${this.searchQuery
       }&page=${this.page}`
     );
     const films = await response.json();
