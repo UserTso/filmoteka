@@ -11,8 +11,8 @@ header {
         color: $primary-bg-color;
     }
 
-.container { 
-       display: grid;
+.container__header { 
+    display: grid;
     height: 136px;
 }
 .nav_icon {
