@@ -1,0 +1,70 @@
+header {
+    background: url("/src/images/header-img/header-library.png") no-repeat center;
+    height: 216px;
+}
+
+
+
+.header_link:visited {
+    color: $primary-bg-color;
+}
+
+.container__header {
+    display: grid;
+    height: 136px;
+}
+
+.nav_icon {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.nav_link {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #FFFFFF;
+}
+
+.nav_style {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.header_link-home {
+    margin-right: 39px;
+}
+
+.button__library {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+   
+}
+.button__watched, .button__queue {
+    
+        width: 148px;
+        height: 42px;
+        left: 484px;
+        top: 114px;
+        text-transform: uppercase;
+}

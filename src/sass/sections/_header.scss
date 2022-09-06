@@ -48,6 +48,7 @@ header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-top: 40px;
 }
 
 input {
@@ -68,4 +69,7 @@ input {
             outline: none;
             display: flex;
                 align-items: center;
+}
+.header_link-home {
+    margin-right: 39px;
 }
