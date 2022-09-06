@@ -39,7 +39,7 @@ async function renderGalleryItems(films) {
         }</p></li>`;
       })
       .join('');
-    gallery.insertAdjacentHTML('beforeend', markup);
+    gallery.innerHTML = markup;
   } catch (error) {
     console.log(error.message);
   }
