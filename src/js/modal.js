@@ -1,4 +1,3 @@
-
 import UnsplashAPI from './fetch-films';
 const unsplashAPI = new UnsplashAPI();
 import { mapGanereId, getGeneresConfig } from './gallery';
@@ -15,10 +14,10 @@ async function openModal(e) {
   }
 
   const filmId = e.target.name;
-  modalBackdrop.classList.toggle('is-hidden');
+
   try {
     const result = await unsplashAPI.fetchFilmInfo(filmId);
-    console.log(result);
+    modalBackdrop.classList.toggle('is-hidden');
     renderModal(result);
   } catch (error) {
     console.log(error.message);
@@ -28,7 +27,8 @@ async function openModal(e) {
 }
 
 gallery.addEventListener('click', openModal);
-
+closeBtn.removeEventListener('click', closeModalOnBtnClick);
+document.removeEventListener('keydown', closeModal);
 // ?_____________CLOSE MODAL______________
 
 function closeModal(e) {
@@ -87,12 +87,7 @@ async function renderModal(film) {
           <p class="modal__about">
             ${film.overview || 'Unknown'}
           </p>
-          <div class="modal__btn">
-            <button type="button" class="modal__btn-watched">
-              add to Watched
-            </button>
-            <button type="button" class="modal__btn-queue">add to queue</button>
-          </div>
+          
         </div>`;
 
     modalWrap.innerHTML = markup;
@@ -100,4 +95,3 @@ async function renderModal(film) {
     console.log(error.message);
   }
 }
-
