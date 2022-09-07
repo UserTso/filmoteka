@@ -5,8 +5,8 @@
                 <a class="header_link" href="/src/index.html">
                     <svg class="icon" width="24" height="24">
                         <use href="/src/images/header_svg/symbol-defs.svg#film-1"></use>
-                    </svg>
-                    Filmoteka </a>
+                    </svg></a>
+                <a class="header_link header_filmoteka" href="/src/index.html">Filmoteka </a>
             </div>
             <div class="nav_link">
                 <a class="header_link header_link-home current" href="/src/index.html">HOME</a>
@@ -14,12 +14,12 @@
             </div>
         </nav>
         <form class="search-form">
-            <input type="text" name="input" placeholder="Movie search" />
-            <svg class="form__icon" width="20" height="20">
-                <use href="/src/images/header_svg/symbol-defs.svg#search-2-1"></use>
-            </svg>
+            <input type="text" name="input" placeholder="Movie search" autocomplete="off" />
 
-            <!-- <button tupe="submit">search</button> -->
+
+            <button class="button__svg" tupe="submit"><svg class="form__icon" width="20" height="20">
+                    <use href="/src/images/header_svg/symbol-defs.svg#search-2-1"></use>
+                </svg></button>
 
         </form>
         <p class="empty">Sorry, I can't find "anything"</p>

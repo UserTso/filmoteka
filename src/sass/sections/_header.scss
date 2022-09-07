@@ -1,32 +1,29 @@
 
 header {
-    background-image: url("/src/images/header-img/abstract-background-with-red-lines\ 1\ \(3\).png");
+    background-image: url("/src/images/header-img/header-mob.jpg");
+
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-        height: 216px;
+        height: 230px;
+        opacity: 0.9;
+        @media screen and (min-width: 768px) {
+            background-image: url("/src/images/header-img/header-tablet.jpg");
+            height: 216px;
+        }
+
+                @media screen and (min-width: 1200px) {
+                background-image: url("/src/images/header-img/header.jpg");
+                    height: 216px;
+                }
 
 }
-@media screen and (min-width: 768px){
-    header {
-        min-width: 320px;
 
-            background-image: url("/src/images/header-img/abstract-background-with-red-lines\ 1\ \(3\).png");
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: cover;
-                height: 216px;
-        
-        }
-    }
-// }
-@media screen and (min-width: 1200px){
 
-    }
-// }
-// a:visited {
-//     color: $primary-bg-color;
-// }
+
+a {
+    color: $primary-bg-color;
+}
 .header_link:visited {
         color: $primary-bg-color;
     }
@@ -34,7 +31,7 @@ header {
     margin-right: 10px;
 }
 .container__header { 
-    display: grid;
+    display: flow-root;
     height: 136px;
 }
 .nav_icon {
@@ -100,7 +97,10 @@ input::placeholder {
 .header_link-home {
     margin-right: 39px;
 }
-
+.button__svg{
+    border: 0;
+        background: transparent;
+}
 .empty, .not-found {
     color: red;
     display: none;
@@ -127,3 +127,16 @@ input::placeholder {
         margin-top: 41px;
 }
 
+.header_filmoteka {
+    display: none;
+    @media screen and (min-width: 768px) {
+        display: flex;
+        }
+    
+        @media screen and (min-width: 1200px) {
+        
+        }
+}
+
+// @media screen and (min-width: 768px) {}
+// @media screen and (min-width: 1200px) {}
