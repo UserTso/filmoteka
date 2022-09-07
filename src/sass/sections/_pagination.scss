@@ -8,3 +8,53 @@
     margin-bottom: 50px;
 }
 
+.tui-pagination {
+    height: 28px;
+    margin: 14px 0 12px;
+    line-height: normal;
+    text-align: center;
+    font-size: 0;
+}
+
+.tui-pagination .tui-page-btn {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+  height: 40px;
+    padding: 8px;
+    margin-left: 0;
+    color: #333;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 2;
+    text-decoration: none;
+    vertical-align: middle;
+    border: 1px solid #ddd; 
+    border-width: 1px 0; 
+}
+
+.tui-pagination .tui-page-btn:hover {
+    background-color: #f4f4f4;
+}
+
+.tui-pagination .tui-is-selected, .tui-pagination strong {
+    color: #fff;
+    background: #FF6B08;
+    border-color: #4b96e6;
+    cursor: default;
+}
+
+.tui-pagination .tui-is-selected:hover {
+    background-color: #FF6B08;
+}
+
+.tui-pagination .tui-first, .tui-pagination .tui-prev, .tui-pagination .tui-next, .tui-pagination .tui-last, .tui-pagination .tui-prev-is-ellip, .tui-pagination .tui-next-is-ellip {
+    overflow: hidden;
+    height: 40px;
+    padding: 0;
+    font-size: 0;
+    line-height: 38px;
+    white-space: nowrap;
+    font-weight: normal;
+    border: 1px solid #ddd;
+}
