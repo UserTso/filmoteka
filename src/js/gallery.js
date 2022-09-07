@@ -1,6 +1,6 @@
 const gallery = document.querySelector('.gallery-list');
 
-import { createPagination } from "./pagination";
+import { createPagination } from './pagination';
 import UnsplashAPI from './fetch-films';
 const unsplashAPI = new UnsplashAPI();
 
@@ -15,17 +15,16 @@ async function popularFilms() {
       page: result.page,
       totalPages: result.total_pages,
     });
-    pagination.on('afterMove', (event) => {
-     
-      unsplashAPI.page =  event.page;
-    //  console.log(unsplashAPI.page);
+    pagination.on('afterMove', event => {
+      unsplashAPI.page = event.page;
+      //  console.log(unsplashAPI.page);
       unsplashAPI.fetchPopularFilms().then(result => {
-      //  console.log(result);
+        //  console.log(result);
         renderGalleryItems(result.results);
-      })
-     
- });
- 
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
     renderGalleryItems(result.results);
   } catch (error) {
     console.log(error.message);

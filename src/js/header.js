@@ -1,5 +1,6 @@
 import UnsplashAPI from './fetch-films';
 import { renderGalleryItems } from './gallery';
+import { createPagination } from './pagination';
 
 const unsplashAPI = new UnsplashAPI();
 
@@ -24,18 +25,32 @@ async function searchFilm(event) {
     return;
   }
   try {
-    const { results } = await unsplashAPI.searchMovies();
-    if (results.length === 0) {
+    const result = await unsplashAPI.searchMovies();
+    if (result.results.length === 0) {
       empty.style.display = 'none';
       notFound.style.display = 'block';
       return;
     }
+    const pagination = createPagination({
+      totalItems: result.total_results,
+      page: result.page,
+      totalPages: result.total_pages,
+    });
+    pagination.on('afterMove', event => {
+      unsplashAPI.page = event.page;
+      //  console.log(unsplashAPI.page);
+      unsplashAPI.searchMovies().then(result => {
+        //  console.log(result);
+        notFound.style.display = 'none';
 
+        empty.style.display = 'none';
+        renderGalleryItems(result.results);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
     // console.log(results);
-    notFound.style.display = 'none';
 
-    empty.style.display = 'none';
-    renderGalleryItems(results);
+    renderGalleryItems(result.results);
 
     // console.log(results);
   } catch (error) {
