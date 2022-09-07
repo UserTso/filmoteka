@@ -1,5 +1,6 @@
 const gallery = document.querySelector('.gallery-list');
 
+import { createPagination } from "./pagination";
 import UnsplashAPI from './fetch-films';
 const unsplashAPI = new UnsplashAPI();
 
@@ -7,9 +8,25 @@ const unsplashAPI = new UnsplashAPI();
 
 async function popularFilms() {
   try {
-    const { results } = await unsplashAPI.fetchPopularFilms();
-    // console.log(results);
-    renderGalleryItems(results);
+    const result = await unsplashAPI.fetchPopularFilms();
+    // console.log(result);
+    const pagination = createPagination({
+      totalItems: result.total_results,
+      page: result.page,
+      totalPages: result.total_pages,
+    });
+    pagination.on('afterMove', (event) => {
+     
+      unsplashAPI.page =  event.page;
+    //  console.log(unsplashAPI.page);
+      unsplashAPI.fetchPopularFilms().then(result => {
+      //  console.log(result);
+        renderGalleryItems(result.results);
+      })
+     
+ });
+ 
+    renderGalleryItems(result.results);
   } catch (error) {
     console.log(error.message);
   }
