@@ -11,9 +11,8 @@ async function popularFilms() {
     const result = await unsplashAPI.fetchPopularFilms();
     // console.log(result);
     const pagination = createPagination({
-      totalItems: result.total_results,
+      totalItems: result.total_results > 10000 ? 10000 : result.total_results,
       page: result.page,
-      totalPages: result.total_pages,
     });
     pagination.on('afterMove', event => {
       unsplashAPI.page = event.page;
