@@ -2,19 +2,20 @@
     <div class="container container__header">
         <nav class="nav_style">
             <div class="nav_icon">
-                <svg class="icon" width="24" height="24">
-                    <use href="/src/images/header_svg/symbol-defs.svg#film-1"></use>
-                </svg>
-                <a class="header_link" href="/src/index.html"> Filmoteka </a>
+                <a class="header_link" href="/src/index.html">
+                    <svg class="icon" width="24" height="24">
+                        <use href="/src/images/header_svg/symbol-defs.svg#film-1"></use>
+                    </svg>
+                    Filmoteka </a>
             </div>
             <div class="nav_link">
                 <a class="header_link header_link-home" href="/src/index.html">HOME</a>
-                <a class="header_link" href="/src/index-library.html">MY LIBRARY</a>
+                <a class="header_link current" href="/src/index-library.html">MY LIBRARY</a>
             </div>
         </nav>
         <div class="button__library">
             <button type="button" class="button__watched">Watched</button>
-            <button type="button" class="button__queue">queue</button>
+            <button type="button" class="button__queue button__current">queue</button>
         </div>
     </div>
 </header>
