@@ -2,12 +2,12 @@ import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 
 const container = document.getElementById('tui-pagination-container');
-export const createPagination = ({ totalItems, totalPages, page } = {}) => {
+export const createPagination = ({ totalItems, page } = {}) => {
   const options = {
     // below default value of options
     totalItems,
-    itemsPerPage: totalItems / totalPages,
-    visiblePages: 5,
+    itemsPerPage: 20,
+    visiblePages: 7,
     page,
     centerAlign: true,
     firstItemClassName: 'tui-first-child',
