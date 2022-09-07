@@ -1,3 +1,4 @@
+
 import UnsplashAPI from './fetch-films';
 const unsplashAPI = new UnsplashAPI();
 import { mapGanereId, getGeneresConfig } from './gallery';
@@ -99,3 +100,4 @@ async function renderModal(film) {
     console.log(error.message);
   }
 }
+
