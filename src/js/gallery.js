@@ -9,7 +9,7 @@ const unsplashAPI = new UnsplashAPI();
 async function popularFilms() {
   try {
     const result = await unsplashAPI.fetchPopularFilms();
-    // console.log(result);
+    console.log(result);
     const pagination = createPagination({
       totalItems: result.total_results > 10000 ? 10000 : result.total_results,
       page: result.page,
@@ -48,7 +48,7 @@ export async function renderGalleryItems(films) {
           ? new URL('../images/gallery/question-mark.jpeg', import.meta.url)
           : `https://image.tmdb.org/t/p/w500${film.poster_path}`
       }"
-  alt="${film.title}"
+  alt="${film.title}" name="${film.id}"
   /><h2 class='title'>${film.title}</h2>
   <p class='info'>${
     mapGanereId(film.genre_ids, generesConfig) || 'Unknown'
@@ -63,7 +63,7 @@ export async function renderGalleryItems(films) {
 
 // ?----------------Replaces 'id' with ganeres 'name'---------
 
-function mapGanereId(filmGeneresId, generesConfig) {
+export function mapGanereId(filmGeneresId, generesConfig) {
   return filmGeneresId
     .map(generes => {
       return generesConfig[generes] || 'Unknown';
@@ -73,7 +73,7 @@ function mapGanereId(filmGeneresId, generesConfig) {
 
 // ?-------------------Make Obj with id: name------------
 
-function getGeneresConfig(allGeneres) {
+export function getGeneresConfig(allGeneres) {
   return allGeneres.reduce((previousValue, { name, id }) => {
     return { ...previousValue, [id]: name };
   }, {});
