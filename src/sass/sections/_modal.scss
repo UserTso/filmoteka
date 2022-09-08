@@ -54,7 +54,7 @@
 
 .modal__contents {
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   display: flex;
 
   @media screen and (min-width: 768px) {
@@ -146,25 +146,25 @@
 }
 
 .modal__info--accent {
-  display: inline-block;
-  width: 36px;
-  height: 16px;
+  padding: 2px 5px;
   text-align: center;
-  line-height: 1.35;
-
-  border-radius: 4px;
+  color: #fff;
   background-color: #ff6b01;
-  color: #ffffff;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1;
+  display: inline-block;
 }
 
 .modal__info--noaccent {
-  display: inline-block;
-  width: 36px;
-  height: 16px;
+  padding: 2px 5px;
   text-align: center;
-  line-height: 1.35;
 
   border-radius: 4px;
+  font-size: 12px;
+  line-height: 1;
+  display: inline-block;
+
   background-color: #f7f7f7;
 }
 
