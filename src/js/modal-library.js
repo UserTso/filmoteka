@@ -1,5 +1,6 @@
 import UnsplashAPI from './fetch-films';
 const unsplashAPI = new UnsplashAPI();
+import { getSpinner } from './spiner';
 
 import { makeMarkup } from './gallery-library';
 
@@ -16,10 +17,13 @@ async function openModal(e) {
   if (e.target.nodeName !== 'IMG') {
     return;
   }
+  const spinner = getSpinner();
 
   const filmId = e.target.name;
   //   console.log(filmId);
   try {
+    modalBackdrop.append(spinner);
+
     const result = await unsplashAPI.fetchFilmInfo(filmId);
     modalBackdrop.classList.toggle('is-hidden');
     // console.log(result);
@@ -32,6 +36,8 @@ async function openModal(e) {
     }
   } catch (error) {
     console.log(error.message);
+  } finally {
+    spinner.remove();
   }
   document.addEventListener('keydown', closeModal);
   closeBtn.addEventListener('click', closeModalOnBtnClick);
@@ -98,23 +104,20 @@ async function renderModal(film) {
     const generesConfig = getGeneresConfig(genres);
     // console.log(generesConfig);
 
-    const markup = `<img src="${
-      film.poster_path === null
-        ? new URL('../images/gallery/question-mark.jpeg', import.meta.url)
-        : `https://image.tmdb.org/t/p/w500${film.poster_path}`
-    }" alt="photo" class="modal__poster" />
+    const markup = `<img src="${film.poster_path === null
+      ? new URL('../images/gallery/question-mark.jpeg', import.meta.url)
+      : `https://image.tmdb.org/t/p/w500${film.poster_path}`
+      }" alt="photo" class="modal__poster" />
         <div>
           <h2 class="modal__title">${film.title.toUpperCase() || 'Unknown'}</h2>
           <table class="modal__info">
             <tr>
               <th>Vote/Votes</th>
               <td>
-                <span class="modal__info--accent">${
-                  film.vote_average || 'Unknown'
-                }</span> /
-                <span class="modal__info--noaccent">${
-                  film.vote_count || 'Unknown'
-                }</span>
+                <span class="modal__info--accent">${film.vote_average || 'Unknown'
+      }</span> /
+                <span class="modal__info--noaccent">${film.vote_count || 'Unknown'
+      }</span>
               </td>
             </tr>
             <tr>
@@ -127,13 +130,12 @@ async function renderModal(film) {
             </tr>
             <tr>
               <th>Genre</th>
-              <td>${
-                film.genres
-                  .map(genere => {
-                    return genere.name;
-                  })
-                  .join(', ') || 'Unknown'
-              }</td>
+              <td>${film.genres
+        .map(genere => {
+          return genere.name;
+        })
+        .join(', ') || 'Unknown'
+      }</td>
             </tr>
           </table>
           <h3 class="modal__about--title">About</h3>
