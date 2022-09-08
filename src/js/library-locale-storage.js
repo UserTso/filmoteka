@@ -1,3 +1,6 @@
+const emptyQueueDiv = document.querySelector('.empty-queue-container');
+const emptyWatchedDiv = document.querySelector('.empty-watched-container');
+
 const WATCHED = 'watched';
 const QUEUE = 'queue';
 
@@ -49,6 +52,9 @@ export function onModalBtnClick(result) {
       btnWatched.textContent = 'Remove from watched';
       btnWatched.addEventListener('click', onHandleRemoveWatch);
     }
+    if (emptyWatchedDiv && !emptyWatchedDiv.classList.contains('is-hidden')) {
+      emptyWatchedDiv.classList.add('is-hidden');
+    }
   }
   function onHandleRemoveWatch() {
     const watchedFilm = JSON.parse(localStorage.getItem(WATCHED));
@@ -60,6 +66,10 @@ export function onModalBtnClick(result) {
     watchedFilm.splice(watchedFilmToRemove, 1);
 
     localStorage.setItem(WATCHED, JSON.stringify(watchedFilm));
+
+    if (emptyWatchedDiv && watchedFilm.length === 0) {
+      emptyWatchedDiv.classList.remove('is-hidden');
+    }
 
     btnWatched.removeEventListener('click', onHandleRemoveWatch);
     btnWatched.textContent = 'Add to Watched';
@@ -110,6 +120,9 @@ export function onModalBtnClick(result) {
       btnQueue.textContent = 'remove from queue';
       btnQueue.addEventListener('click', onHandleRemoveQueue);
     }
+    if (emptyQueueDiv && !emptyQueueDiv.classList.contains('is-hidden')) {
+      emptyQueueDiv.classList.add('is-hidden');
+    }
   }
 
   function onHandleRemoveQueue() {
@@ -120,6 +133,10 @@ export function onModalBtnClick(result) {
     queueFilm.splice(queueFilmToRemove, 1);
 
     localStorage.setItem(QUEUE, JSON.stringify(queueFilm));
+
+    if (emptyQueueDiv && queueFilm.length === 0) {
+      emptyQueueDiv.classList.remove('is-hidden');
+    }
 
     btnQueue.removeEventListener('click', onHandleRemoveQueue);
     btnQueue.textContent = 'add to queue';

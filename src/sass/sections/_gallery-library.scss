@@ -74,3 +74,25 @@
     margin-bottom: 32px;
   }
 }
+
+.empty-queue-container {
+  color: #ff6b01;
+  font-size: 50px;
+  text-align: center;
+  height: 100vh;
+}
+
+.empty-queue-container.is-hidden {
+  display: none;
+}
+
+.empty-watched-container {
+  color: #01ff84;
+  font-size: 50px;
+  text-align: center;
+  height: 100vh;
+}
+
+.empty-watched-container.is-hidden {
+  display: none;
+}
