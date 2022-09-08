@@ -84,7 +84,7 @@ refs.btnQueue.addEventListener('click', onBtnQueueClickIsActive);
 refs.btnWatched.addEventListener('click', onBtnWatchedClickIsActive);
 
 export function makeMarkup(data) {
-  console.log(data);
+  // console.log(data);
   let markup = data
     .map(
       data => `<li class="gallery__item" >
