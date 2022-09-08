@@ -1,6 +1,7 @@
 import UnsplashAPI from './fetch-films';
 import { renderGalleryItems } from './gallery';
 import { createPagination } from './pagination';
+import { getSpinner } from './spiner';
 
 const unsplashAPI = new UnsplashAPI();
 
@@ -11,6 +12,8 @@ const notFound = document.querySelector('.not-found');
 searchForm.addEventListener('submit', searchFilm);
 
 async function searchFilm(event) {
+  const spinner = getSpinner();
+
   event.preventDefault();
   empty.style.display = 'none';
   notFound.style.display = 'none';
@@ -26,6 +29,8 @@ async function searchFilm(event) {
     return;
   }
   try {
+    searchForm.append(spinner);
+
     const result = await unsplashAPI.searchMovies();
     if (result.results.length === 0) {
       empty.style.display = 'none';
@@ -56,5 +61,7 @@ async function searchFilm(event) {
     // console.log(results);
   } catch (error) {
     console.log(error.message);
+  } finally {
+    spinner.remove();
   }
 }

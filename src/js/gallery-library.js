@@ -1,4 +1,5 @@
 // variables
+
 const emptyQueueDiv = document.querySelector('.empty-queue-container');
 const emptyWatchedDiv = document.querySelector('.empty-watched-container');
 const galleryLibrary = document.querySelector('.gallery-library-list');
@@ -88,17 +89,14 @@ export function makeMarkup(data) {
   let markup = data
     .map(
       data => `<li class="gallery__item" >
-      <img class="gallery__img" src="${
-        data.poster_path === null
+      <img class="gallery__img" src="${data.poster_path === null
           ? new URL('../images/gallery/question-mark.jpeg', import.meta.url)
           : `https://image.tmdb.org/t/p/w500${data.poster_path}`
-      }" alt="movie image" name="${data.id}">
+        }" alt="movie image" name="${data.id}">
       <h3 class="gallery__title">${data.title || 'Unknown'}</h3>
-       <p class="gallery__text">${mapGanereId(data.genres)} &#124 ${
-        data.release_date.slice(0, 4) || 'Unknown'
-      } <span class="info-accent">${
-        data.vote_average || 'Unknown'
-      }</span></p></li>`
+       <p class="gallery__text">${mapGanereId(data.genres)} &#124 ${data.release_date.slice(0, 4) || 'Unknown'
+        } <span class="info-accent">${data.vote_average || 'Unknown'
+        }</span></p></li>`
     )
     .join('');
   return markup;
