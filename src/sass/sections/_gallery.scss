@@ -2,24 +2,6 @@
   margin: 20px 0 20px 0;
 }
 
-.gallery__linkUp {
-  position: fixed;
-  display: flex;
-  right: 25px;
-  bottom: 25px;
-  width: 30px;
-  height: 20px;
-  border-radius: 50px;
-  border: 1px solid rgba(158, 155, 155, 0.5);
-  background-color: rgba(158, 155, 155, 0.5);
-  color:black;
-}
-
-.gallery__up {
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .gallery-list {
   display: flex;
   flex-wrap: wrap;
