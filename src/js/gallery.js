@@ -40,6 +40,7 @@ export async function renderGalleryItems(films) {
     // console.log(genres);
     const generesConfig = getGeneresConfig(genres);
     // console.log(generesConfig);
+    console.log(films);
     const markup = films
       .map(film => {
         return `<li class='list-item'>

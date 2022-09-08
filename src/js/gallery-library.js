@@ -84,16 +84,31 @@ refs.btnQueue.addEventListener('click', onBtnQueueClickIsActive);
 refs.btnWatched.addEventListener('click', onBtnWatchedClickIsActive);
 
 export function makeMarkup(data) {
-  // console.log(data);
+  console.log(data);
   let markup = data
     .map(
-      data => `<li class="gallery__item" data-id="${data.id}" >
-      <img class="gallery__img" src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="movie image" name="${data.id}">
-      <h3 class="gallery__title">${data.original_title}</h3>
-       <p class="gallery__text">${data.genres} &#124 ${data.release_date} <span class="info-accent">${data.vote_average}</span></p></li>`
+      data => `<li class="gallery__item" >
+      <img class="gallery__img" src="${
+        data.poster_path === null
+          ? new URL('../images/gallery/question-mark.jpeg', import.meta.url)
+          : `https://image.tmdb.org/t/p/w500${data.poster_path}`
+      }" alt="movie image" name="${data.id}">
+      <h3 class="gallery__title">${data.title || 'Unknown'}</h3>
+       <p class="gallery__text">${mapGanereId(data.genres)} &#124 ${
+        data.release_date.slice(0, 4) || 'Unknown'
+      } <span class="info-accent">${
+        data.vote_average || 'Unknown'
+      }</span></p></li>`
     )
     .join('');
   return markup;
 }
 
 // !------------------------------
+function mapGanereId(genres) {
+  return genres
+    .map(genere => {
+      return genere.name || 'Unknown';
+    })
+    .join(', ');
+}
