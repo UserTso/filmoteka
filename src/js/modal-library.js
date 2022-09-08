@@ -1,12 +1,14 @@
 import UnsplashAPI from './fetch-films';
 const unsplashAPI = new UnsplashAPI();
-import { mapGanereId, getGeneresConfig } from './gallery';
+
+import { makeMarkup } from './gallery-library';
 
 import { onModalBtnClick } from './library-locale-storage';
-const gallery = document.querySelector('.gallery-list');
+const gallery = document.querySelector('.gallery-library-list');
 const modalBackdrop = document.querySelector('.backdrop');
 const modalWrap = document.querySelector('.modal__contents');
 const closeBtn = document.querySelector('.modal__btn-close');
+const btnQueue = document.querySelector('.button__queue');
 
 // ?_________________OPEN MODAL_______________
 
@@ -16,7 +18,7 @@ async function openModal(e) {
   }
 
   const filmId = e.target.name;
-
+  //   console.log(filmId);
   try {
     const result = await unsplashAPI.fetchFilmInfo(filmId);
     modalBackdrop.classList.toggle('is-hidden');
@@ -44,11 +46,51 @@ function closeModal(e) {
   if (e.code === 'Escape') {
     modalBackdrop.classList.toggle('is-hidden');
     document.removeEventListener('keydown', closeModal);
+
+    if (btnQueue.classList.contains('button__current')) {
+      console.log('hi');
+      try {
+        savedQueue = localStorage.getItem('queue');
+        savedQueue = savedQueue === null ? [] : JSON.parse(savedQueue);
+      } catch (error) {
+        console.error('Get state error: ', error.message);
+      }
+      gallery.innerHTML = makeMarkup(savedQueue);
+      return;
+    }
+    try {
+      savedWatched = localStorage.getItem('watched');
+      savedWatched = savedWatched === null ? [] : JSON.parse(savedWatched);
+    } catch (error) {
+      console.error('Get state error: ', error.message);
+    }
+    gallery.innerHTML = makeMarkup(savedWatched);
+    console.log('hi2');
   }
 }
 
 function closeModalOnBtnClick(e) {
   modalBackdrop.classList.toggle('is-hidden');
+
+  if (btnQueue.classList.contains('button__current')) {
+    console.log('hi');
+    try {
+      savedQueue = localStorage.getItem('queue');
+      savedQueue = savedQueue === null ? [] : JSON.parse(savedQueue);
+    } catch (error) {
+      console.error('Get state error: ', error.message);
+    }
+    gallery.innerHTML = makeMarkup(savedQueue);
+    return;
+  }
+  try {
+    savedWatched = localStorage.getItem('watched');
+    savedWatched = savedWatched === null ? [] : JSON.parse(savedWatched);
+  } catch (error) {
+    console.error('Get state error: ', error.message);
+  }
+  gallery.innerHTML = makeMarkup(savedWatched);
+  console.log('hi2');
 }
 
 // ?___________________Modal RENDER
@@ -106,11 +148,28 @@ async function renderModal(film) {
       <button type="button" class="modal__btn-watched">add to Watched</button>
       <button type="button" class="modal__btn-queue">add to queue</button>
     </div>
-
-        </div>`;
+ </div>`;
 
     modalWrap.innerHTML = markup;
   } catch (error) {
     console.log(error.message);
   }
+}
+
+function mapGanereId(filmGeneresId, generesConfig) {
+  //   console.log(filmGeneresId);
+  //   console.log(generesConfig);
+  return filmGeneresId
+    .map(generes => {
+      return generesConfig[generes] || 'Unknown';
+    })
+    .join(', ');
+}
+
+// ?-------------------Make Obj with id: name------------
+
+function getGeneresConfig(allGeneres) {
+  return allGeneres.reduce((previousValue, { name, id }) => {
+    return { ...previousValue, [id]: name };
+  }, {});
 }
