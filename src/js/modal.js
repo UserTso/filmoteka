@@ -1,6 +1,8 @@
 import UnsplashAPI from './fetch-films';
 const unsplashAPI = new UnsplashAPI();
 import { mapGanereId, getGeneresConfig } from './gallery';
+
+import { onModalBtnClick } from './library-locale-storage';
 const gallery = document.querySelector('.gallery-list');
 const modalBackdrop = document.querySelector('.backdrop');
 const modalWrap = document.querySelector('.modal__contents');
@@ -18,7 +20,14 @@ async function openModal(e) {
   try {
     const result = await unsplashAPI.fetchFilmInfo(filmId);
     modalBackdrop.classList.toggle('is-hidden');
-    renderModal(result);
+    // console.log(result);
+
+    try {
+      await renderModal(result);
+      onModalBtnClick(result);
+    } catch (error) {
+      console.log(error.message);
+    }
   } catch (error) {
     console.log(error.message);
   }
@@ -87,7 +96,11 @@ async function renderModal(film) {
           <p class="modal__about">
             ${film.overview || 'Unknown'}
           </p>
-          
+              <div class="modal__btn">
+      <button type="button" class="modal__btn-watched">add to Watched</button>
+      <button type="button" class="modal__btn-queue">add to queue</button>
+    </div>
+
         </div>`;
 
     modalWrap.innerHTML = markup;
