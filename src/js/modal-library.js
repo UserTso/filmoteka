@@ -48,7 +48,6 @@ function closeModal(e) {
     document.removeEventListener('keydown', closeModal);
 
     if (btnQueue.classList.contains('button__current')) {
-      console.log('hi');
       try {
         savedQueue = localStorage.getItem('queue');
         savedQueue = savedQueue === null ? [] : JSON.parse(savedQueue);
@@ -65,7 +64,6 @@ function closeModal(e) {
       console.error('Get state error: ', error.message);
     }
     gallery.innerHTML = makeMarkup(savedWatched);
-    console.log('hi2');
   }
 }
 
@@ -73,7 +71,6 @@ function closeModalOnBtnClick(e) {
   modalBackdrop.classList.toggle('is-hidden');
 
   if (btnQueue.classList.contains('button__current')) {
-    console.log('hi');
     try {
       savedQueue = localStorage.getItem('queue');
       savedQueue = savedQueue === null ? [] : JSON.parse(savedQueue);
@@ -90,7 +87,6 @@ function closeModalOnBtnClick(e) {
     console.error('Get state error: ', error.message);
   }
   gallery.innerHTML = makeMarkup(savedWatched);
-  console.log('hi2');
 }
 
 // ?___________________Modal RENDER
