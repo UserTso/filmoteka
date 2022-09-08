@@ -1,6 +1,6 @@
 import UnsplashAPI from './fetch-films';
 const unsplashAPI = new UnsplashAPI();
-import { mapGanereId, getGeneresConfig } from './gallery';
+import { getGeneresConfig } from './gallery';
 
 import { onModalBtnClick } from './library-locale-storage';
 const gallery = document.querySelector('.gallery-list');
