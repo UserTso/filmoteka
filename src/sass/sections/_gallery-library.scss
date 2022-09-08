@@ -75,8 +75,9 @@
   }
 }
 
-.empty-queue-container {
-  color: #ff6b01;
+.empty-queue-container,
+.empty-watched-container {
+  color: $accent-color;
   font-size: 50px;
   text-align: center;
   height: 100vh;
@@ -84,13 +85,6 @@
 
 .empty-queue-container.is-hidden {
   display: none;
-}
-
-.empty-watched-container {
-  color: #01ff84;
-  font-size: 50px;
-  text-align: center;
-  height: 100vh;
 }
 
 .empty-watched-container.is-hidden {

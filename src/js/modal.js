@@ -89,7 +89,13 @@ async function renderModal(film) {
             </tr>
             <tr>
               <th>Genre</th>
-              <td>${mapGanereId(film.genres, generesConfig)}</td>
+              <td>${
+                film.genres
+                  .map(genere => {
+                    return genere.name;
+                  })
+                  .join(', ') || 'Unknown'
+              }</td>
             </tr>
           </table>
           <h3 class="modal__about--title">About</h3>
