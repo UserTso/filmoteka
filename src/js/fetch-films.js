@@ -31,6 +31,7 @@ export default class UnsplashAPI {
       }`
     );
     const genere = await response.json();
+    localStorage.setItem('genre_ids', JSON.stringify(genere));
     return genere;
   }
 
