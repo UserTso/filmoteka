@@ -28,7 +28,7 @@
   text-transform: uppercase;
 }
 
-.info {
+.gallery__text {
   color: $accent-color;
 }
 .info-accent {
@@ -37,6 +37,7 @@
   height: 16px;
   text-align: center;
   line-height: 1.35;
+  font-size: 12px;
 
   border-radius: 4px;
   background-color: #ff6b01;
