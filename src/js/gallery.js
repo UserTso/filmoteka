@@ -14,7 +14,7 @@ async function popularFilms() {
     gallery.append(spinner);
 
     const result = await unsplashAPI.fetchPopularFilms();
-    console.log(result);
+    // console.log(result);
     const pagination = createPagination({
       totalItems: result.total_results > 10000 ? 10000 : result.total_results,
       page: result.page,
@@ -47,18 +47,20 @@ export async function renderGalleryItems(films) {
     // console.log(genres);
     const generesConfig = getGeneresConfig(genres);
     // console.log(generesConfig);
-    console.log(films);
+    // console.log(films);
     const markup = films
       .map(film => {
         return `<li class='list-item'>
-      <img class='poster' src="${film.poster_path === null
-            ? new URL('../images/gallery/question-mark.jpeg', import.meta.url)
-            : `https://image.tmdb.org/t/p/w500${film.poster_path}`
-          }"
+      <img class='poster' src="${
+        film.poster_path === null
+          ? new URL('../images/gallery/question-mark.jpeg', import.meta.url)
+          : `https://image.tmdb.org/t/p/w500${film.poster_path}`
+      }"
   alt="${film.title}" name="${film.id}"
   /><h2 class='title'>${film.title}</h2>
-  <p class='info'>${mapGanereId(film.genre_ids, generesConfig) || 'Unknown'
-          } &#124 ${film.release_date.slice(0, 4) || 'Unknown'}</p></li>`;
+  <p class='info'>${
+    mapGanereId(film.genre_ids, generesConfig) || 'Unknown'
+  } &#124 ${film.release_date.slice(0, 4) || 'Unknown'}</p></li>`;
       })
       .join('');
     gallery.innerHTML = markup;

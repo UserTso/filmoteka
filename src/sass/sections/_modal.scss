@@ -1,27 +1,39 @@
 .backdrop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
-
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  transition: 250ms;
+  z-index: 100;
 }
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+//   ______ modal-window ______
 .open_modal {
-  position: fixed;
-  display: flex;
-
-  min-width: 280px;
-  background-color: #ffffff;
-  border-radius: 4px;
-
+  width: 100%;
+  height: 96vh;
+  background: #fff;
+  border-radius: 2px;
+  padding: 44px 20px;
+  position: relative;
+  overflow: auto;
   @media screen and (min-width: 768px) {
-    width: 100vw;
-    height: 100vh;
+    height: auto;
+    width: 700px;
   }
 
   @media screen and (min-width: 1280px) {
     width: 806px;
-    height: 558px;
   }
 }
 .close-x {
@@ -40,43 +52,15 @@
   left: 4px;
 }
 
-.backdrop {
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 20px;
-  pointer-events: all;
-
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0.25);
-
-  overflow-y: scroll;
-
-  @media screen and (min-width: 768px) {
-    padding: 219px 20px;
-  }
-
-  @media screen and (min-width: 768px) {
-    padding: 150px 20px;
-  }
-}
-// .open_modal {
-//   background-color: #ffffff;
-//   width: 806px;
-// }
-
 .modal__contents {
-  padding: 48px 20px 40px 20px;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
 
   @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
     display: flex;
-    padding: 40px 72px 40px 36px;
   }
 
   @media screen and (min-width: 1280px) {
@@ -270,3 +254,5 @@
   opacity: 0;
   transform: scaleX(0);
 }
+
+// !____====================================
