@@ -69,6 +69,7 @@ export function onModalBtnClick(result) {
 
     if (emptyWatchedDiv && watchedFilm.length === 0) {
       emptyWatchedDiv.classList.remove('is-hidden');
+      emptyQueueDiv.classList.add('is-hidden');
     }
 
     btnWatched.removeEventListener('click', onHandleRemoveWatch);
@@ -136,6 +137,7 @@ export function onModalBtnClick(result) {
 
     if (emptyQueueDiv && queueFilm.length === 0) {
       emptyQueueDiv.classList.remove('is-hidden');
+      emptyWatchedDiv.classList.add('is-hidden');
     }
 
     btnQueue.removeEventListener('click', onHandleRemoveQueue);
