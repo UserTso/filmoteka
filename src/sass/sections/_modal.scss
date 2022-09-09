@@ -1,0 +1,258 @@
+.backdrop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  transition: 250ms;
+  z-index: 100;
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+//   ______ modal-window ______
+.open_modal {
+  width: 100%;
+  height: 96vh;
+  background: #fff;
+  border-radius: 2px;
+  padding: 44px 20px;
+  position: relative;
+  overflow: auto;
+  @media screen and (min-width: 768px) {
+    height: auto;
+    width: 700px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 806px;
+  }
+}
+.close-x {
+  height: 30px;
+  width: 30px;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+.close-x:after {
+  position: relative;
+  content: '\d7';
+  font-size: 30px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  top: -6px;
+  left: 4px;
+}
+
+.modal__contents {
+  flex-direction: column;
+  align-items: flex-start;
+  display: flex;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    display: flex;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding: 40px 12px;
+  }
+}
+
+.modal__btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 8px 8px 0 0;
+  width: 30px;
+  height: 30px;
+  border: none;
+
+  background-color: transparent;
+
+  transition: font-size 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal__btn-close:hover {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+// .icon-close {
+//     fill: #000000;
+//     z-index: 10;
+// }
+
+.modal__poster {
+  border-radius: 4px;
+  margin-bottom: 20px;
+  width: 100%;
+  // object-fit: cover;
+
+  @media screen and (min-width: 768px) {
+    max-width: 264px;
+    height: 373px;
+    margin: 0 68px 0 0;
+  }
+
+  @media screen and (min-width: 1280px) {
+    max-width: 375px;
+    height: 478px;
+    margin-right: 16px;
+  }
+}
+
+.modal__title {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.modal__info {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  width: 100%;
+}
+
+.modal__info th {
+  line-height: 1.33;
+  color: #8c8c8c;
+
+  text-align: left;
+  width: 45%;
+}
+
+.modal__info td {
+  line-height: 1.7;
+}
+
+.modal__info--accent {
+  padding: 2px 5px;
+  text-align: center;
+  color: #fff;
+  background-color: #ff6b01;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1;
+  display: inline-block;
+}
+
+.modal__info--noaccent {
+  padding: 2px 5px;
+  text-align: center;
+
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1;
+  display: inline-block;
+
+  background-color: #f7f7f7;
+}
+
+.modal__about--title {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  margin: 20px 0 8px 0;
+}
+
+.modal__about {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.67;
+}
+
+.modal__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+
+  @media screen and (min-width: 1280px) {
+    justify-content: start;
+  }
+}
+
+.modal__btn-watched {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-right: 20px;
+  width: 110px;
+  height: 44px;
+  border: none;
+  border-radius: 4px;
+
+  background-color: #ff6b01;
+  color: #ffffff;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+
+  @media screen and (min-width: 768px) {
+    width: 125px;
+    height: 44px;
+  }
+}
+
+.modal__btn-queue {
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  width: 110px;
+  height: 44px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+
+  background-color: inherit;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+
+  @media screen and (min-width: 768px) {
+    width: 125px;
+    height: 44px;
+  }
+}
+
+.backdrop.is-hidden {
+  pointer-events: none;
+  /* visibility: hidden; */
+
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+// !____====================================
