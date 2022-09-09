@@ -55,6 +55,24 @@ function closeModal(e) {
     modalBackdrop.classList.toggle('is-hidden');
     document.removeEventListener('click', closeModal);
     document.removeEventListener('keydown', closeModalEsc);
+
+    if (btnQueue.classList.contains('button__current')) {
+      try {
+        savedQueue = localStorage.getItem('queue');
+        savedQueue = savedQueue === null ? [] : JSON.parse(savedQueue);
+      } catch (error) {
+        console.error('Get state error: ', error.message);
+      }
+      gallery.innerHTML = makeMarkup(savedQueue);
+      return;
+    }
+    try {
+      savedWatched = localStorage.getItem('watched');
+      savedWatched = savedWatched === null ? [] : JSON.parse(savedWatched);
+    } catch (error) {
+      console.error('Get state error: ', error.message);
+    }
+    gallery.innerHTML = makeMarkup(savedWatched);
   }
 }
 
