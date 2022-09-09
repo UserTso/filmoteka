@@ -51,10 +51,10 @@ document.removeEventListener('click', closeModal);
 // ?_____________CLOSE MODAL______________
 
 function closeModal(e) {
-  console.log(e.target);
   if (e.target === modalBackdrop) {
     modalBackdrop.classList.toggle('is-hidden');
     document.removeEventListener('click', closeModal);
+    document.removeEventListener('keydown', closeModalEsc);
   }
 }
 
