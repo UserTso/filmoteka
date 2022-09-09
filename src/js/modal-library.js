@@ -39,19 +39,29 @@ async function openModal(e) {
   } finally {
     spinner.remove();
   }
-  document.addEventListener('keydown', closeModal);
+  document.addEventListener('keydown', closeModalEsc);
   closeBtn.addEventListener('click', closeModalOnBtnClick);
+  document.addEventListener('click', closeModal);
 }
 
 gallery.addEventListener('click', openModal);
 closeBtn.removeEventListener('click', closeModalOnBtnClick);
-document.removeEventListener('keydown', closeModal);
+document.removeEventListener('keydown', closeModalEsc);
+document.removeEventListener('click', closeModal);
 // ?_____________CLOSE MODAL______________
 
 function closeModal(e) {
+  if (e.target === modalBackdrop) {
+    modalBackdrop.classList.toggle('is-hidden');
+    document.removeEventListener('click', closeModal);
+    document.removeEventListener('keydown', closeModalEsc);
+  }
+}
+
+function closeModalEsc(e) {
   if (e.code === 'Escape') {
     modalBackdrop.classList.toggle('is-hidden');
-    document.removeEventListener('keydown', closeModal);
+    document.removeEventListener('keydown', closeModalEsc);
 
     if (btnQueue.classList.contains('button__current')) {
       try {
@@ -104,20 +114,23 @@ async function renderModal(film) {
     const generesConfig = getGeneresConfig(genres);
     // console.log(generesConfig);
 
-    const markup = `<img src="${film.poster_path === null
-      ? new URL('../images/gallery/question-mark.jpeg', import.meta.url)
-      : `https://image.tmdb.org/t/p/w500${film.poster_path}`
-      }" alt="photo" class="modal__poster" />
+    const markup = `<img src="${
+      film.poster_path === null
+        ? new URL('../images/gallery/question-mark.jpeg', import.meta.url)
+        : `https://image.tmdb.org/t/p/w500${film.poster_path}`
+    }" alt="photo" class="modal__poster" />
         <div>
           <h2 class="modal__title">${film.title.toUpperCase() || 'Unknown'}</h2>
           <table class="modal__info">
             <tr>
               <th>Vote/Votes</th>
               <td>
-                <span class="modal__info--accent">${film.vote_average || 'Unknown'
-      }</span> /
-                <span class="modal__info--noaccent">${film.vote_count || 'Unknown'
-      }</span>
+                <span class="modal__info--accent">${
+                  film.vote_average || 'Unknown'
+                }</span> /
+                <span class="modal__info--noaccent">${
+                  film.vote_count || 'Unknown'
+                }</span>
               </td>
             </tr>
             <tr>
@@ -130,12 +143,13 @@ async function renderModal(film) {
             </tr>
             <tr>
               <th>Genre</th>
-              <td>${film.genres
-        .map(genere => {
-          return genere.name;
-        })
-        .join(', ') || 'Unknown'
-      }</td>
+              <td>${
+                film.genres
+                  .map(genere => {
+                    return genere.name;
+                  })
+                  .join(', ') || 'Unknown'
+              }</td>
             </tr>
           </table>
           <h3 class="modal__about--title">About</h3>
