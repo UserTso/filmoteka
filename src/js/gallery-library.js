@@ -48,13 +48,13 @@ const onBtnWatchedClickIsActive = e => {
     console.error('Get state error: ', error.message);
   }
   emptyQueueDiv.classList.add('is-hidden');
-  console.log('hi');
+  // console.log('hi');
   galleryLibrary.innerHTML = '';
   if (savedWatched.length === 0) {
     emptyWatchedDiv.classList.remove('is-hidden');
     return;
   }
-  console.log('ho');
+  // console.log('ho');
   emptyWatchedDiv.classList.add('is-hidden');
 
   galleryLibrary.innerHTML = makeMarkup(savedWatched);
@@ -75,6 +75,7 @@ const onBtnQueueClickIsActive = e => {
     console.error('Get state error: ', error.message);
   }
   emptyWatchedDiv.classList.add('is-hidden');
+  galleryLibrary.innerHTML = '';
   if (savedQueue.length === 0) {
     emptyQueueDiv.classList.remove('is-hidden');
     return;
