@@ -10,6 +10,7 @@ const modalBackdrop = document.querySelector('.backdrop');
 const modalWrap = document.querySelector('.modal__contents');
 const closeBtn = document.querySelector('.modal__btn-close');
 const btnQueue = document.querySelector('.button__queue');
+const btnWatched = document.querySelector('.button__watched');
 
 // ?_________________OPEN MODAL_______________
 
@@ -66,19 +67,22 @@ function closeModal(e) {
       gallery.innerHTML = makeMarkup(savedQueue);
       return;
     }
-    try {
-      savedWatched = localStorage.getItem('watched');
-      savedWatched = savedWatched === null ? [] : JSON.parse(savedWatched);
-    } catch (error) {
-      console.error('Get state error: ', error.message);
+    if (btnWatched.classList.contains('button__current')) {
+      try {
+        savedWatched = localStorage.getItem('watched');
+        savedWatched = savedWatched === null ? [] : JSON.parse(savedWatched);
+      } catch (error) {
+        console.error('Get state error: ', error.message);
+      }
+      gallery.innerHTML = makeMarkup(savedWatched);
     }
-    gallery.innerHTML = makeMarkup(savedWatched);
   }
 }
 
 function closeModalEsc(e) {
   if (e.code === 'Escape') {
     modalBackdrop.classList.toggle('is-hidden');
+    document.removeEventListener('click', closeModal);
     document.removeEventListener('keydown', closeModalEsc);
 
     if (btnQueue.classList.contains('button__current')) {
@@ -91,19 +95,22 @@ function closeModalEsc(e) {
       gallery.innerHTML = makeMarkup(savedQueue);
       return;
     }
-    try {
-      savedWatched = localStorage.getItem('watched');
-      savedWatched = savedWatched === null ? [] : JSON.parse(savedWatched);
-    } catch (error) {
-      console.error('Get state error: ', error.message);
+    if (btnWatched.classList.contains('button__current')) {
+      try {
+        savedWatched = localStorage.getItem('watched');
+        savedWatched = savedWatched === null ? [] : JSON.parse(savedWatched);
+      } catch (error) {
+        console.error('Get state error: ', error.message);
+      }
+      gallery.innerHTML = makeMarkup(savedWatched);
     }
-    gallery.innerHTML = makeMarkup(savedWatched);
   }
 }
 
 function closeModalOnBtnClick(e) {
   modalBackdrop.classList.toggle('is-hidden');
-
+  document.removeEventListener('click', closeModal);
+  document.removeEventListener('keydown', closeModalEsc);
   if (btnQueue.classList.contains('button__current')) {
     try {
       savedQueue = localStorage.getItem('queue');
@@ -114,24 +121,21 @@ function closeModalOnBtnClick(e) {
     gallery.innerHTML = makeMarkup(savedQueue);
     return;
   }
-  try {
-    savedWatched = localStorage.getItem('watched');
-    savedWatched = savedWatched === null ? [] : JSON.parse(savedWatched);
-  } catch (error) {
-    console.error('Get state error: ', error.message);
+  if (btnWatched.classList.contains('button__current')) {
+    try {
+      savedWatched = localStorage.getItem('watched');
+      savedWatched = savedWatched === null ? [] : JSON.parse(savedWatched);
+    } catch (error) {
+      console.error('Get state error: ', error.message);
+    }
+    gallery.innerHTML = makeMarkup(savedWatched);
   }
-  gallery.innerHTML = makeMarkup(savedWatched);
 }
 
 // ?___________________Modal RENDER
 
 async function renderModal(film) {
   try {
-    const { genres } = await unsplashAPI.fetchGeneres();
-    // console.log(genres);
-    const generesConfig = getGeneresConfig(genres);
-    // console.log(generesConfig);
-
     const markup = `<img src="${
       film.poster_path === null
         ? new URL('../images/gallery/question-mark.jpeg', import.meta.url)
@@ -184,22 +188,4 @@ async function renderModal(film) {
   } catch (error) {
     console.log(error.message);
   }
-}
-
-function mapGanereId(filmGeneresId, generesConfig) {
-  //   console.log(filmGeneresId);
-  //   console.log(generesConfig);
-  return filmGeneresId
-    .map(generes => {
-      return generesConfig[generes] || 'Unknown';
-    })
-    .join(', ');
-}
-
-// ?-------------------Make Obj with id: name------------
-
-function getGeneresConfig(allGeneres) {
-  return allGeneres.reduce((previousValue, { name, id }) => {
-    return { ...previousValue, [id]: name };
-  }, {});
 }
